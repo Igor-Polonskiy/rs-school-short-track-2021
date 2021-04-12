@@ -21,8 +21,73 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+function minesweeper(matrix) {
+  const mymatrix = [];
+  matrix.forEach((element, index) => {
+    mymatrix[index] = [];
+    element.forEach((e, i) => {
+      mymatrix[index][i] = 0;
+    });
+  });
+  matrix.forEach((element, index) => {
+    element.forEach((e, i) => {
+      if (e === true) {
+        if (index === 0 && i === 0) {
+          mymatrix[index + 1][i]++;
+          mymatrix[index + 1][i + 1]++;
+          mymatrix[index][i + 1]++;
+        } else if (index === 0 && i === element.length - 1) {
+          mymatrix[index + 1][i]++;
+          mymatrix[index + 1][i - 1]++;
+          mymatrix[index][i - 1]++;
+        } else if (index === 0 && i > 0 && i < element.length - 1) {
+          mymatrix[index + 1][i]++;
+          mymatrix[index + 1][i - 1]++;
+          mymatrix[index][i - 1]++;
+          mymatrix[index + 1][i + 1]++;
+          mymatrix[index][i + 1]++;
+        } else if (index === matrix.length - 1 && i === 0) {
+          mymatrix[index - 1][i]++;
+          mymatrix[index - 1][i + 1]++;
+          mymatrix[index][i + 1]++;
+        } else if (index === matrix.length - 1 && i === element.length - 1) {
+          mymatrix[index - 1][i]++;
+          mymatrix[index - 1][i - 1]++;
+          mymatrix[index][i - 1]++;
+        } else if (index === matrix.length - 1 && i > 0 && i < element.length - 1) {
+          mymatrix[index - 1][i]++;
+          mymatrix[index - 1][i - 1]++;
+          mymatrix[index][i - 1]++;
+          mymatrix[index - 1][i + 1]++;
+          mymatrix[index][i + 1]++;
+        } else if (i === 0) {
+          mymatrix[index - 1][i]++;
+          mymatrix[index - 1][i + 1]++;
+          mymatrix[index][i + 1]++;
+          mymatrix[index + 1][i + 1]++;
+          mymatrix[index + 1][i]++;
+        } else if (i === element.length - 1) {
+          mymatrix[index - 1][i]++;
+          mymatrix[index - 1][i - 1]++;
+          mymatrix[index][i - 1]++;
+          mymatrix[index + 1][i - 1]++;
+          mymatrix[index + 1][i]++;
+        } else {
+          mymatrix[index - 1][i]++;
+          mymatrix[index - 1][i + 1]++;
+          mymatrix[index - 1][i - 1]++;
+          mymatrix[index + 1][i]++;
+          mymatrix[index + 1][i + 1]++;
+          mymatrix[index + 1][i - 1]++;
+          mymatrix[index][i + 1]++;
+          mymatrix[index][i - 1]++;
+        }
+
+        // mymatrix[index][i] = 0;
+      }
+    });
+  });
+  return mymatrix;
 }
 
 module.exports = minesweeper;
